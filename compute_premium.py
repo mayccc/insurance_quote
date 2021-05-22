@@ -4,7 +4,7 @@ import datetime
 import numpy as np
 from datetime import timedelta
 import re
-import dateutil
+import dateutil.parser
 
 
 def get_quote(birth, license, income_month):
@@ -36,7 +36,7 @@ def calc_premium( first_4_digit ,last_4_digit , age_in_days,age_in_years, income
 
 def get_age_in_days(birth):
 	
-	birthday=dateutil.parser.parse(birth)
+	birthday=parse_date(birth)
 	now = datetime.date.today()
 	delta = now - birthday.date()
 	
@@ -44,12 +44,18 @@ def get_age_in_days(birth):
 
 def get_age_in_years(birth):
 	
-	birthday=dateutil.parser.parse(birth)
+	birthday=parse_date(birth)
 	now = datetime.date.today()
 	delta = now.year - birthday.year
 	
 	return delta
 
+
+def parse_date(string):
+	birthday=dateutil.parser.parse(string)
+	return birthday
+
+	
 
 def parse_driver_license(string):
 	
