@@ -44,7 +44,6 @@ class TestApp(unittest.TestCase):
 
 		self.assertEqual(response.status_code,400)
 
-class TestPremCalc(unittest.TestCase):
 
 	def test_parse_driver_license(self):
 		first_4_digit ,last_4_digit= compute_premium.parse_driver_license('1234ABC2234')

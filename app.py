@@ -57,4 +57,4 @@ def main():
 
 
 if __name__=='__main__':
-	app.run(port=2225)
+	app.run()
