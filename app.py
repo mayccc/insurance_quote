@@ -49,7 +49,7 @@ def main():
     birth= request.json['birth']
     license= request.json['driver_license']
     income_month=  request.json['income_month']
-	
+
     prem_monthly , quote_expiry,age  = get_quote(birth, license, income_month)
 
     return jsonify({'quote_id':id_no , "premium_monthly": prem_monthly ,"age": age,  "quote_expiry_date": quote_expiry }) , 200 
@@ -57,4 +57,5 @@ def main():
 
 
 if __name__=='__main__':
-	app.run()
+    app.run()
+
