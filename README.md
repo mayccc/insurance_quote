@@ -27,5 +27,5 @@ curl -X POST http://127.0.0.1:5000/insurance/quote -d '{"name":"Rong", "gender":
 
 ### Success Quote
 ```
-{"age":2,"premium_monthly":419.13,"quote_expiry_date":"07-06-2021","quote_id":5}
+{"age":2,"gender":"M","premium_monthly":419.13,"quote_expiry_date":"07-06-2021","quote_id":2}
 ```
