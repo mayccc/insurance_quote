@@ -52,7 +52,7 @@ def main():
 
     prem_monthly , quote_expiry,age  = get_quote(birth, license, income_month)
 
-    return jsonify({'quote_id':id_no , "premium_monthly": prem_monthly ,"age": age,  "quote_expiry_date": quote_expiry }) , 200 
+    return jsonify({'quote_id':id_no , "premium_monthly": prem_monthly ,"age": age,  "gender":gender, "quote_expiry_date": quote_expiry }) , 200 
 
 
 
