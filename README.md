@@ -1,5 +1,5 @@
-#  Insurance quote
-## local web application to 
+
+## local web application to return insurance quote 
 
 invoke HTTP POST request to http://localhost:5000/insurance/quote to return insurance quote
 
@@ -19,7 +19,8 @@ Request JSON Body example
 
 
 ### usage
-
+1. start the webapp by running the start_my_app.sh
+2. invoke HTTP POST request
 ```
 curl -X POST http://127.0.0.1:5000/insurance/quote -d '{"name":"Rong", "gender":"M", "birth": "23-08-2019", "driver_license":"1234XXX3423", "income_month":3033.3 }' -H "Content-Type: application/json"
 ```
