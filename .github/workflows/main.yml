@@ -1,0 +1,67 @@
+name: CICD
+
+env:
+  AWS_ACCESS_KEY_ID     : ${{ secrets.AWS_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_SECRET_KEY }}
+  AWS_REGION            : ${{ secrets.AWS_REGION }}
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.json'
+      - '**.md'
+  release:
+    tags:
+      - 'v*'
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Docker Buildx
+      id: buildx
+      uses: docker/setup-buildx-action@v1
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
+    - uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: ./ 
+        file: ./Dockerfile
+        builder: ${{ steps.buildx.outputs.name }}
+        push: true
+        tags: mayccc/insurance-quote:latest
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: deploy to ec2 
+      run: |
+        chmod +x ./deploy.sh
+        ./deploy.sh
+        

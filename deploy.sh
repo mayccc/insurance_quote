@@ -1,6 +1,6 @@
-docker build . -t mayccc/insurance-quote
+# docker build . -t mayccc/insurance-quote
 
-docker push mayccc/insurance-quote
+# docker push mayccc/insurance-quote
 
 # check if instance exists 
 instance_id=`aws ec2 describe-instances \
