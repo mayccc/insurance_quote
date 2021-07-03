@@ -64,7 +64,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Deploy to EC2 
-        working-directory: ./
+        working-directory: ./deploy/
         run: |
           chmod +x ./deploy.sh
           ./deploy.sh
