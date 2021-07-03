@@ -66,6 +66,6 @@ jobs:
       - name: Deploy to EC2 
         working-directory: ./deploy/
         run: |
-          chmod +x ./deploy.sh
-          ./deploy.sh
+          chmod +x ./deploy_cfn.sh
+          ./deploy_cfn.sh
         
