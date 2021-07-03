@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+
+Resources:
+
+    #Create Bucket name in SSM Parameter Store    
+  BucketNameParamater:
+    Type: AWS::SSM::Parameter
+    Properties: 
+      Description: ElasticIp
+      Name: elastic-ip
+      Type: String
+      Value: !Ref IPAddress
+      
+  IPAddress:
+    Type: AWS::EC2::EIP

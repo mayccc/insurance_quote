@@ -3,7 +3,7 @@ FROM python:3.8
 
 WORKDIR /insurance_quote
 
-COPY . /insurance_quote
+COPY . /insurance_quote/
 
 #RUN pip install --upgrade pip
 
